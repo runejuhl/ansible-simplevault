@@ -10,7 +10,7 @@ import pytest
 
 from ansible import constants as C
 from ansible.errors import AnsibleFilterError, AnsibleFilterTypeError
-from ansible_collections.petardo.simplevault.plugins.filter.vault import do_vault, do_unvault
+from ansible_collections.runejuhl.simplevault.plugins.filter.vault import do_vault, do_unvault
 
 vault_password_file = '/tmp/vault_pass.txt'
 with open(vault_password_file, 'wb') as f:

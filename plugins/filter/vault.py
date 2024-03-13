@@ -96,8 +96,8 @@ class FilterModule(object):
 
     def filters(self):
         filters = {
-            'simple_vault': do_vault,
-            'simple_unvault': do_unvault,
+            'vault': do_vault,
+            'unvault': do_unvault,
         }
 
         return filters

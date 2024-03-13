@@ -1,4 +1,4 @@
-# Ansible Collection - petardo.simplevault
+# Ansible Collection - runejuhl.simplevault
 
 An Ansible filter plugin to `vault` and `unvault` using
 `DEFAULT_VAULT_PASSWORD_FILE` (e.g. set using `vault_password_file` in the
@@ -19,7 +19,7 @@ An Ansible filter plugin to `vault` and `unvault` using
         {
           'shadow': shadow.content
                     | b64decode
-                    | simple_vault(wrap_object=true)
+                    | runejuhl.simplevault.vault(wrap_object=true)
         } | to_nice_yaml
       }}
     dest: '/tmp/vaulted_shadow.yml'
@@ -32,8 +32,8 @@ An Ansible filter plugin to `vault` and `unvault` using
     msg: |-
       {{
         'omg'
-        | simple_vault(wrap_object=true)
-        | simple_unvault
+        | runejuhl.simplevault.vault(wrap_object=true)
+        | runejuhl.simplevault.unvault
       }}
   delegate_to: 'localhost'
 ```

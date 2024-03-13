@@ -1,0 +1,36 @@
+---
+DOCUMENTATION:
+  name: vault
+  author: Rune Juhl
+  version_added: "2.12"
+  short_description: Vault your secrets using default Vault password
+  description:
+    - Put your information into an encrypted Ansible Vault using default Vault password.
+  positional: secret
+  options:
+    _input:
+      description: Data to vault.
+      type: string
+      required: true
+    wrap_object:
+      description:
+        - This toggle can force the return of an C(AnsibleVaultEncryptedUnicode) string object, when C(False), you get a simple string.
+        - Mostly useful when combining with the C(to_yaml) filter to output the 'inline vault' format.
+      type: bool
+      default: False
+
+EXAMPLES: |
+  # simply encrypt my key in a vault
+  vars:
+    myvaultedkey: "{{ keyrawdata|runejuhl.simplevault.vault }} "
+
+  - name: save templated vaulted data
+    template: src=dump_template_data.j2 dest=/some/key/vault.txt
+    vars:
+      mysalt: '{{2**256|random(seed=inventory_hostname)}}'
+      template_data: '{{ secretdata|runejuhl.simplevault.vault }}'
+
+RETURN:
+  _value:
+    description: The vault string that contains the secret data (or C(AnsibleVaultEncryptedUnicode) string object).
+    type: string
